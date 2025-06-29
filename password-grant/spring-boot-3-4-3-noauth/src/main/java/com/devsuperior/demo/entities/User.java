@@ -103,22 +103,30 @@ public class User implements UserDetails {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void addRole(Role role) {
+        roles.add(role);
     }
+
+    public boolean hasRole(String roleName) {
+        for ( Role role : roles) {
+            if(role.getAuthority().equals(roleName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
         User user = (User) o;
-
-        return Objects.equals(id, user.id);
+        return roles.equals(user.roles);
     }
 
     @Override
     public int hashCode() {
-        return id != null ? id.hashCode() : 0;
+        return roles.hashCode();
     }
 }

@@ -24,6 +24,7 @@ public class ProductService {
 
 	@Transactional(readOnly = true)
 	public List<ProductDTO> findAll() {
+
 		return productRepository.findAll().stream().map(x -> new ProductDTO(x)).toList();
 	}
 
